@@ -21,7 +21,13 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
+						<a class="nav-link" th:href="@{/categories}">Liste des catégories</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" th:href="@{/addProduct}">Ajouter un produit</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/addCategory}">Ajouter une catégorie</a>
 					</li>
 				</ul>
 			</div>
@@ -31,7 +37,8 @@
 		<h2 class="my-5 text-center">Liste des produits</h2>
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				<table class="table table-striped">
+					<div th:if="${products.empty}" class="alert alert-danger">Aucun produit en base de données</div>
+				<table th:if="${not #lists.isEmpty(products)}" class="table table-striped">
 					<thead>
 						<tr>
 							<th>Nom</th>
@@ -41,18 +48,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:if="${products.empty}">
-							<td colspan="3">Aucun produit en base de données</td>
-						</tr>
 						<tr th:each="product: ${products}">
 							<td><span th:text="${product.name}"></span></td>
 							<td><span th:text="${product.description}"></span></td>
 							<td><span th:text="${product.price}"></span></td>
 							<td>
-								<button class="btn btn-sm btn-info w-100">Update</button>
+								<a th:href="@{/updateProduct/{id}(id=${product.id})}" class="btn btn-sm btn-info w-100">Update</button>
 							</td>
 							<td>
-								<button class="btn btn-sm btn-danger w-100">Delete</button>
+								<a th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-sm btn-danger w-100">Delete</a>
 							</td>
 						</tr>
 					</tbody>
@@ -61,5 +65,8 @@
 		</div>
 	</div>
 </body>
+<footer class="position-fixed bottom-0 text-center w-100 bg-light p-2">
+	<p class="pt-2 fst-italic text-muted">POC - Spring - MVC © 2023</p>
+</footer>
 
 </html>

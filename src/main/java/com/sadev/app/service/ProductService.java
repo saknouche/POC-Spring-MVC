@@ -20,7 +20,7 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 	
-	public Optional<Product> getProductById(Long id) {
+	public Optional<Product> getProductById(Integer id) {
 		return productRepository.findById(id);
 	}
 	
@@ -28,17 +28,15 @@ public class ProductService {
 		return productRepository.findByCategory(category);
 	}
 	
-	public Product createProduct(Product prodcut) {
-		if(prodcut != null) {			
-			Product savedProduct = productRepository.save(prodcut);
+	public Product createProduct(Product product) {
+		if(product != null) {			
+			Product savedProduct = productRepository.save(product);
 			return savedProduct;
 		}
 		return null;
 	}
 	
-	public void deleteProductById(Long id) {
-		if(id != null) {
+	public void deleteProductById(Integer id) {
 			productRepository.deleteById(id);
-		}
 	}
 }

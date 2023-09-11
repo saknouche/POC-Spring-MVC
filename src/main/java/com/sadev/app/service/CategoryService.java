@@ -1,6 +1,5 @@
 package com.sadev.app.service;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class CategoryService {
 		return categoryRepository.findAll();
 	}
 	
-	public Optional<Category> getCategoryById(Long id) {
+	public Optional<Category> getCategoryById(Integer id) {
 		return categoryRepository.findById(id);
 	}
 	
@@ -29,7 +28,7 @@ public class CategoryService {
 		return null;
 	}
 	
-	public void deleteCategoryById(Long id) {
+	public void deleteCategoryById(Integer id) {
 		if(id != null) {
 			categoryRepository.deleteById(id);
 		}

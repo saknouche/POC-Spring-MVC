@@ -15,13 +15,13 @@ import jakarta.persistence.Table;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false, unique = true)
+	private Integer id;
+	@Column(nullable = false, unique = true) 
 	private String name;
 	@Column(nullable = false)
 	private String description;
 	@Column(nullable = false)
-	private String price;
+	private Double price;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -30,18 +30,20 @@ public class Product {
 		super();
 	}
 
-	public Product(String name, String description, String price) {
+	public Product(String name, String description, Double price, Category category) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.category = category;
 	}
 
-	public Long getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -61,11 +63,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

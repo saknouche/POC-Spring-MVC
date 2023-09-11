@@ -33,38 +33,36 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container mt-5">
+	<div class="container">
+		<h2 class="my-5 text-center">Liste des catégories</h2>
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<form method="post" action="/addProduct" class="d-flex flex-column gap-3">
-					<div class="mb-3">
-						<label for="name" class="form-label">Nom</label>
-						<input name="name" type="text" class="form-control" id="name" placeholder="nom">
-					</div>
-					<div class="mb-3">
-						<label for="description" class="form-label">Description</label>
-						<textarea name="description" class="form-control" id="description"
-							rows="3">message ...</textarea>
-					</div>
-					<div class="mb-3">
-						<label for="price" id="price" class="form-label">Prix</label>
-						<input type="text" name="price" class="form-control" id="price" placeholder="prix">
-					</div>
-					<div class="mb-3" th:if="${not #lists.isEmpty(categories)}">
-						<label for="category" id="category" class="form-label">Catégorie</label>
-						<select name="category" class="form-select">
-							<option value="#">---Choisir une catégorie----</option>
-							<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</form>
+					<div th:if="${categories.empty}" class="alert alert-danger">Aucune catégorie en base de données</div>
+				<table th:if="${not #lists.isEmpty(categories)}" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th class="text-center" colspan="2">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="category: ${categories}">
+							<td><span th:text="${category.name}"></span></td>
+							<td>
+								<a th:href="@{/updateCategory/{id}(id=${category.id})}" class="btn btn-sm btn-info w-100">Update</button>
+							</td>
+							<td>
+								<a th:href="@{/deleteCategory/{id}(id=${category.id})}" class="btn btn-sm btn-danger w-100">Delete</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	<footer class="position-fixed bottom-0 text-center w-100 bg-light p-2">
-		<p class="pt-2 fst-italic text-muted">POC - Spring - MVC © 2023</p>
-	</footer>
 </body>
+<footer class="position-fixed bottom-0 text-center w-100 bg-light p-2">
+	<p class="pt-2 fst-italic text-muted">POC - Spring - MVC © 2023</p>
+</footer>
 
 </html>
